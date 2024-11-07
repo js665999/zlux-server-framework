@@ -56,12 +56,8 @@ function readUtf8FilesToArray(fileArray) {
 class ApimlHandler {
   constructor(pluginDef, pluginConf, componentConf, context, zoweConf) {
     this.logger = context.logger;
-    if (zoweConf.zowe.cookieIdentifier && (zoweConf.components.gateway?.apiml?.security?.auth?.uniqueCookie === true)) {
-      this.tokenName = `${TOKEN_NAME}.${zoweConf.zowe.cookieIdentifier}`;
-    } else {
-      this.tokenName = TOKEN_NAME;
-    }
     this.apimlConf = componentConf.node.mediationLayer.server;    
+    this.tokenName = this.apimlConf.cookieName;
     this.gatewayUrl = `https://${this.apimlConf.gatewayHostname}:${this.apimlConf.gatewayPort}`;
     this.isHttps = !zluxUtil.isClientAttls(zoweConf);
     if (this.isHttps) {
