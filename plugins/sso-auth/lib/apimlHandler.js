@@ -20,7 +20,6 @@ const zluxUtil = require('../../../lib/util');
  * However, it is not clear if that is configurable or if APIML may use a different value under other circumstances
  */
 const DEFAULT_EXPIRATION_MS = 29700000;
-const TOKEN_NAME = 'apimlAuthenticationToken';
 
 function readUtf8FilesToArray(fileArray) {
   var contentArray = [];
@@ -56,7 +55,7 @@ function readUtf8FilesToArray(fileArray) {
 class ApimlHandler {
   constructor(pluginDef, pluginConf, componentConf, context, zoweConf) {
     this.logger = context.logger;
-    this.apimlConf = componentConf.node.mediationLayer.server;    
+    this.apimlConf = componentConf.node.mediationLayer.server;
     this.tokenName = this.apimlConf.cookieName;
     this.gatewayUrl = `https://${this.apimlConf.gatewayHostname}:${this.apimlConf.gatewayPort}`;
     this.isHttps = !zluxUtil.isClientAttls(zoweConf);
